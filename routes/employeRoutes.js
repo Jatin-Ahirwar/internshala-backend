@@ -11,12 +11,21 @@ const {
         employeresetpassword,
         employeupdate,
         employeavatar,
-        employepicc
+        employepicc,
+        createinternship,
+        readinternships,
+        readsingleinternship,
+        createjob,
+        readjobs,
+        readsinglejob,
+        currentEmploye
       } = require("../controllers/employeController")
 
-// Get / 
-router.get("/" , isAuthenticated ,homepage)
+// post / 
+router.post("/", homepage)
 
+
+router.post("/employe", isAuthenticated  ,currentEmploye)
 
 // Post /signup
 router.post("/signup" , employesignup )
@@ -32,7 +41,7 @@ router.post("/send-mail", employesendmail  )
 
 
 // post /forget-link/:id
-router.post("/forget-link/:id", employeforgetlink )
+router.post("/forget-link/", employeforgetlink )
 
 // post /forget-link/:id
 router.post("/reset-password/:id", isAuthenticated , employeresetpassword )
@@ -40,8 +49,35 @@ router.post("/reset-password/:id", isAuthenticated , employeresetpassword )
 // post /forget-link/:id
 router.post("/update/:id", isAuthenticated , employeupdate )
 
-// post /employe/avatar/:id
-router.post("/avatar/:id", isAuthenticated , employepicc )
+// post /avatar/:id
+router.post("/avatar/:id", isAuthenticated , employeavatar )
+
+
+// -------------------------- internship routes ------------------------------
+
+// post /internship/create
+router.post("/internship/create", isAuthenticated , createinternship )
+
+
+// post /internship/read
+router.post("/internship/read", isAuthenticated , readinternships )
+
+// post /internship/read/:id
+router.post("/internship/read/:id", isAuthenticated , readsingleinternship )
+
+
+// -------------------------- job routes ------------------------------
+
+// post /job/create
+router.post("/job/create", isAuthenticated , createjob )
+
+
+// post /job/read
+router.post("/job/read", isAuthenticated , readjobs )
+
+// post /job/read/:id
+router.post("/job/read/:id", isAuthenticated , readsinglejob )
+
 
 
 

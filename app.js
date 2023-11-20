@@ -1,10 +1,12 @@
 require("dotenv").config({path:'./.env'})
 const express = require("express")
 const app = express()
+const cors = require('cors');
 
 // db connections
 require("./models/database.js").connectDatabase()
 
+app.use(cors({credentials:true, origin:true}))
 
 // morgan
 const logger = require("morgan")
@@ -42,7 +44,6 @@ app.all("*",(req,res,next) =>{
     next(new Errorhandler(`Requested Url Not Found ${req.url}` , 404))
 })
 app.use(generatedErrors)
-
 
 app.listen(
     process.env.PORT,

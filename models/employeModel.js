@@ -33,7 +33,6 @@ const employeModel = new mongoose.Schema({
         unique:true,
         required:[true, "Email is required"],
         match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
-        
     },
     password:{
         select:false,
@@ -57,8 +56,18 @@ const employeModel = new mongoose.Schema({
         required:[true,"Organisation name is required"],
         minlength:[4,"Organisation name should be atleast more then  4 characters"]
     },
-    internships:[],
-    jobs:[],
+    internship:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"internship"
+        }
+    ],
+    job:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"job"
+        }
+    ],
     },
     { timestamps:true })
 

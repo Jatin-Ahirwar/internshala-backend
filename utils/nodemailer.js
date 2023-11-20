@@ -15,8 +15,8 @@ exports.sendmail = (req,res,url,next) =>{
         from:"Tech Private Limited",
         to:req.body.email,
         subject:"Password Reset Link",
-        html:`<h1>click link below to reset password</h1>
-                <a href="${url}">Password Reset Link</a>`
+        html:`<h1>Forget Password OTP</h1>
+                <a href="${url}">${url}</a>`
     }
     transport.sendMail(mailoptions,(err,info) =>{
         if(err) return next (new ErrorHandler(err , 500))
