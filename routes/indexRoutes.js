@@ -67,12 +67,17 @@ router.post("/student/read/internships/", isAuthenticated , readinternships )
 // ---------------------read internships-------------------------
 
 // post /student/readsingle/:internshipid
-router.post("/student/readsingle/internship/:id", isAuthenticated , readsingleinternships )
+router.post("/student/readsingleinternship/:id", isAuthenticated , readsingleinternships )
 
 // ---------------------read jobs--------------------------------
 
 // post /student/applied/:jobid
 router.post("/student/read/jobs/", isAuthenticated , readjobs )
+
+// ---------------------read singlejobs--------------------------------
+
+// post /student/readsinglejob/:jobid
+router.post("/student/singlejobs/:id", isAuthenticated , readjobs )
 
 
 
