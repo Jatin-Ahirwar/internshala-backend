@@ -213,7 +213,7 @@ exports.readinternships = catchAsyncError(async (req, res, next) => {
 // ---------------------read single internships-------------------------
 
 exports.readsingleinternships = catchAsyncError(async (req, res, next) => {
-        const internship = await internshipModel.findOne({id: req.body.id}).exec()
+        const internship = await internshipModel.findById(req.params.id).exec()
         res.status(200).json({ internship });
 });
       
