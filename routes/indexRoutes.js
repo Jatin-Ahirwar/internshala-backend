@@ -18,7 +18,8 @@ const {
         readjobs,
         readsingleinternships,
         studentAvatar,
-        studentphoto
+        studentphoto,
+        readsinglejob
     }
     = require("../controllers/indexController")
 const { isAuthenticated } = require("../middlewares/auth")
@@ -77,7 +78,7 @@ router.post("/student/read/jobs/", isAuthenticated , readjobs )
 // ---------------------read singlejobs--------------------------------
 
 // post /student/readsinglejob/:jobid
-router.post("/student/singlejobs/:id", isAuthenticated , readjobs )
+router.post("/student/readsinglejob/:id", isAuthenticated , readsinglejob )
 
 
 

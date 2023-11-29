@@ -225,6 +225,15 @@ exports.readjobs = catchAsyncError(async (req, res, next) => {
   res.status(200).json({ jobs });
 });
 
+// ---------------------read single job-------------------------
+
+exports.readsinglejob = catchAsyncError(async (req, res, next) => {
+        const job = await jobModel.findById(req.params.id).exec()
+        res.status(200).json({ job });
+});
+      
+
+
 
 // ---------------------apply internships-------------------------
 
