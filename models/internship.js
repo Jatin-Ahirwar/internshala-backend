@@ -14,12 +14,15 @@ const internshipModel = new mongoose.Schema(
         orgname:String,
         profile:String,
         skill:String,
-        internshiptype:{ type:String, enum:["In Office","Remote"]},
+        internshiptype:{ type:String, enum:["In Office","Remote" , "work from home"]},
         openings:String,
         from:String,
         to:String,
         duration:String,
         responsiblity:String,
+        bookmark:String,
+        location:String,
+        lastdate:String,
         stipend:{
             status:{
                 enum:["Fixed" , "Negotiable" , "Performance Based" ,"Unpaid" ]
