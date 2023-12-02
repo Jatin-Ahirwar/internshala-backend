@@ -255,10 +255,11 @@ exports.applyjob = catchAsyncError(async (req,res,next)=>{
         const student = await students.findById(req.id).exec()
         const job = await jobModel.findById(req.params.jobid).exec()
         student.appliedjobs.push(job._id)
-        job.students.push(job._id)
+        job.students.push(student._id)
         await student.save()
         await job.save()
         res.json({student})
+        console.log({student})
 })
 
 
