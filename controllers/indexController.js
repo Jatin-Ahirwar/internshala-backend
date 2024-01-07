@@ -259,7 +259,7 @@ exports.applyjob = catchAsyncError(async (req,res,next)=>{
         await student.save()
         await job.save()
         res.json({student})
-        console.log({student})
+        // console.log({student})
 })
 
 

@@ -14,10 +14,10 @@ exports.homepage = catchAsyncError(async (req,res,next)=>{
 
 exports.currentEmploye = catchAsyncError(async (req, res, next) => {
   const employe = await employes.findById(req.id)
-    // .populate("jobs")
-    // .populate("internships")
+    .populate("job")
+    .populate("internship")
     .exec();
-  console.log(employe);
+//   console.log(employe);
   res.json(employe);
 });
 
@@ -25,14 +25,13 @@ exports.currentEmploye = catchAsyncError(async (req, res, next) => {
 exports.employesignup = catchAsyncError(async (req,res,next)=>{
     const employe = await new employes(req.body).save()
     sendtoken(employe,201,res)
-    // res.json(req.body)
 })
 
 
 exports.employesignin = catchAsyncError(async (req,res,next)=>{
     const employe = await employes.findOne({email : req.body.email}).select("+password").exec()
     if(!employe) {
-            return next (new ErrorHandler("user not not exist with this email. " , 404))
+            return next (new ErrorHandler("user not exist with this email. " , 404))
     }
     const ismatch = employe.comparepassword(req.body.password)
     if(!ismatch){

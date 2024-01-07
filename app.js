@@ -27,6 +27,7 @@ app.use(session({
 }))
 
 app.use(cookieparser())
+
 // express file-upload
 const fileupload = require("express-fileupload")
 app.use(fileupload())
@@ -38,7 +39,7 @@ app.use("/employe" , require("./routes/employeRoutes.js"))
 
 // error handling
 
-const Errorhandler =require('./utils/ErrorHandler.js')
+const Errorhandler = require('./utils/ErrorHandler.js')
 const { generatedErrors } = require('./middlewares/error.js')
 app.all("*",(req,res,next) =>{
     next(new Errorhandler(`Requested Url Not Found ${req.url}` , 404))

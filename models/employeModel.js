@@ -71,24 +71,24 @@ const employeModel = new mongoose.Schema({
     },
     { timestamps:true })
 
-employeModel.pre("save", function(){
-    if(!this.isModified ("password")){
-        return;
+    employeModel.pre("save", function(){
+        if(!this.isModified ("password")){
+            return;
+        }
+        let salt = bcrypt.genSaltSync(10);
+        this.password = bcrypt.hashSync(this.password , salt)
+    });
+
+
+    employeModel.methods.comparepassword = function(password){
+        return bcrypt.compareSync(password, this.password)
     }
-    let salt = bcrypt.genSaltSync(10);
-    this.password = bcrypt.hashSync(this.password , salt)
-});
 
-
-employeModel.methods.comparepassword = function(password){
-    return bcrypt.compareSync(password, this.password)
-}
-
-employeModel.methods.getjwttoken = function (){
-    return  jwt.sign({id:this._id},process.env.JWT_SECRET,{
-        expiresIn:process.env.JWT_EXPIRE,
-    })
-}
+    employeModel.methods.getjwttoken = function (){
+        return  jwt.sign({id:this._id},process.env.JWT_SECRET,{
+            expiresIn:process.env.JWT_EXPIRE,
+        })
+    }
 
 
 const employe = mongoose.model("employe",employeModel)
