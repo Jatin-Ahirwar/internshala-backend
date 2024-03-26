@@ -82,12 +82,6 @@ router.post("/student/readsinglejob/:id", isAuthenticated , readsinglejob )
 
 
 
-
-
-
-
-
-
 // ---------------------apply internships-------------------------
 
 // post /student/applied/:internshipid
