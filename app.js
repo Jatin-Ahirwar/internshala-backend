@@ -14,7 +14,7 @@ app.use(logger("tiny"))
 
 // bodyparser
 app.use(express.json())
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 
 // session and cookie
@@ -24,7 +24,6 @@ app.use(session({
     resave:true,
     saveUninitialized:true,
     secret:process.env.EXPRESS_SESSION_SECRET,
-    cookie: { secure:false },
 }))
 
 app.use(cookieparser())
