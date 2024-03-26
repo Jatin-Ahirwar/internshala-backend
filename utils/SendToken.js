@@ -5,7 +5,7 @@ exports.sendtoken = (student,statuscode,res) =>{
         expires: new Date(
             Date.now() + process.env.COOKIE_EXPIRE *24 * 60 * 60 * 1000
         ),
-        httpOnly:true,
+        httpOnly: true, secure: false ,  sameSite: 'none' 
 
     }
     res.status(statuscode)
