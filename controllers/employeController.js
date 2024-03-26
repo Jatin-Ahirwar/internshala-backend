@@ -17,7 +17,6 @@ exports.currentEmploye = catchAsyncError(async (req, res, next) => {
     .populate("job")
     .populate("internship")
     .exec();
-//   console.log(employe);
   res.json(employe);
 });
 

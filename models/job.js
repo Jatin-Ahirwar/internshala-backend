@@ -12,7 +12,9 @@ const jobModel = new mongoose.Schema(
             ref:"student"
         }],
         title:String,
-        skill:String,
+        skill:[{
+            type:String
+        }],
         jobtype:{ type:String, enum:["In Office","Remote"]},
         openings:String,
         description:String,
@@ -21,9 +23,7 @@ const jobModel = new mongoose.Schema(
         perks:String,
         assesments:String,
         profile:String,
-        from:String,
-        to:String,
-        duration:String,
+        start:String,
         responsiblity:String,
         bookmark:String,
         location:String,

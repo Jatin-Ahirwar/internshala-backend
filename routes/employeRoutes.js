@@ -62,6 +62,7 @@ router.post("/internship/create", isAuthenticated , createinternship )
 // post /internship/read
 router.post("/internship/read", isAuthenticated , readinternships )
 
+
 // post /internship/read/:id
 router.post("/internship/read/:id", isAuthenticated , readsingleinternship )
 

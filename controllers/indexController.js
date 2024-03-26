@@ -8,7 +8,6 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const { sendtoken } = require("../utils/SendToken");
 const { sendmail } = require("../utils/nodemailer");
 const { readinternships } = require("./employeController");
-const ImageKit = require("imagekit");
 
 exports.homepage = catchAsyncError(async (req,res,next)=>{
         res.json({message:"secure homepage"}); 
@@ -60,6 +59,7 @@ exports.studentsignout = catchAsyncError(async (req,res,next)=>{
 
 
 exports.studentsendmail = catchAsyncError(async (req,res,next)=>{
+        
         const student = await students.findOne({email:req.body.email}).exec()
         if(!student) {
                 return next (new ErrorHandler("user not exist with this email. " , 404))
@@ -69,7 +69,7 @@ exports.studentsendmail = catchAsyncError(async (req,res,next)=>{
         sendmail(req,res,url,next)
         student.resetPasswordToken = `${url}`
         await student.save()
-        res.json({message : "mail has been succesfully sended !"}); 
+        res.json({message : "Mail has been sended succesfully."}); 
         res.json({student,url}); 
 })
 
@@ -106,7 +106,7 @@ exports.studentforgetlink = catchAsyncError(async (req,res,next)=>{
                 return next (new ErrorHandler("Invalid Reset Link" , 500))
         }
         res.status(200).json({
-                message:"password succsesfully changed !"
+                message:"Password succsesfully changed !"
         })
 })
 
@@ -128,7 +128,7 @@ exports.studentupdate = catchAsyncError(async (req,res,next)=>{
         await students.findByIdAndUpdate(req.params.id,req.body).exec()
         res.status(200).json({
                 success:true,
-                message:"student updated successfully"
+                message:"Student details updated successfully."
         })
 })
 
@@ -179,22 +179,28 @@ exports.studentupdate = catchAsyncError(async (req,res,next)=>{
 
 exports.studentphoto = catchAsyncError(async (req,res,next)=>{
    const student = await students.findById(req.params.id).exec()
-   const file = req.files.avatar   
+   const previoustimageID = student.avatar.fileId
+   const file = req.files.avatar
+
    const modifiedfilename = `profileimage-${Date.now()}${path.extname(
         file.name
    )}`  
-   if(student.avatar.fileId !== ""){
-        await imagekit.deleteFile(student.avatar.fileId)
+   
+   if(previoustimageID !== ""){
+        await imagekit.deleteFile(previoustimageID)
    }
+
    const {fileId , url} = await imagekit.upload({
         file: file.data,
         fileName: modifiedfilename
    })
-   student.avatar.fileId = { fileId:fileId , url }
+   student.avatar.fileId = {fileId:fileId}
+   student.avatar.url = {url:url}
+
    await student.save()
    res.status(200).json({
         success:true,
-        message: "file uploaded successfully"
+        message: "Profile image updated successfully"
    })
 });
 
@@ -244,7 +250,12 @@ exports.applyinternship = catchAsyncError(async (req,res,next)=>{
         internship.students.push(student._id)
         await student.save()
         await internship.save()
-        res.json({student})
+        // res.json({student})
+        res.status(200).json({
+                success:true,
+                message: "Internship applied.",
+                student
+        })
 })
 
 
@@ -258,7 +269,13 @@ exports.applyjob = catchAsyncError(async (req,res,next)=>{
         job.students.push(student._id)
         await student.save()
         await job.save()
-        res.json({student})
+        // res.json({student})
+        res.status(200).json({
+                success:true,
+                message: "Job applied",
+                student
+        })
+
         // console.log({student})
 })
 
