@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:false}))
 
 
 // session and cookie
-const session = require("cookie-session")
+const session = require("express-session")
 const cookieparser = require("cookie-parser")
 app.use(session({
     resave:true,
