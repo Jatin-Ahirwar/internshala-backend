@@ -167,7 +167,7 @@ exports.createinternship = catchAsyncError(async (req,res,next)=>{
     internship.employe = employe._id
     employe.internship.push(internship._id)
     await internship.save()    
-    await employe.save()    
+    await employe.save()
     res.status(201).json({success:true , internship})
 })
 

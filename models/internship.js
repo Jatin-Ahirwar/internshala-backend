@@ -13,8 +13,10 @@ const internshipModel = new mongoose.Schema(
         }],
         orgname:String,
         profile:String,
-        skill:String,
-        internshiptype:{ type:String, enum:["In Office","Remote" , "work from home"]},
+        skill:[{
+            type:String
+        }],
+        internshiptype:{ type:String, enum:["In Office", "Remote" , "work from home"]},
         openings:String,
         from:String,
         to:String,
@@ -23,11 +25,14 @@ const internshipModel = new mongoose.Schema(
         bookmark:String,
         location:String,
         lastdate:String,
+        // stipend:{
+        //     status:{
+        //         enum:["Fixed" , "Negotiable" , "Performance Based" ,"Unpaid" ]
+        //     },
+        //     amount:Number
+        // },
         stipend:{
-            status:{
-                enum:["Fixed" , "Negotiable" , "Performance Based" ,"Unpaid" ]
-            },
-            amount:Number
+            type:String
         },
         perks:String,
         assesments:String,

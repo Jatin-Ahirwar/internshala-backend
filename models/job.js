@@ -22,17 +22,14 @@ const jobModel = new mongoose.Schema(
         preferences:String,
         perks:String,
         assesments:String,
-        profile:String,
         start:String,
         responsiblity:String,
         bookmark:String,
         location:String,
+        experience:String,
         lastdate:String,
-        stipend:{
-            status:{
-                enum:["Fixed" , "Negotiable" , "Performance Based" ,"Unpaid" ]
-            },
-            amount:Number
+        salary:{
+            type:String
         },
     },
     { timestamps:true })
